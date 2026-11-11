@@ -1,0 +1,765 @@
+
+/* ==============================
+   1. ตั้งค่าพื้นฐานของเว็บไซต์
+============================== */
+
+:root {
+    /* สีหลัก */
+    --primary-color: #2563eb;
+    --secondary-color: #0ea5e9;
+    --accent-color: #60a5fa;
+
+    /* สีพื้นหลัง */
+    --background-color: #f0f9ff;
+    --card-background: #ffffff;
+
+    /* สีข้อความ */
+    --text-color: #334155;
+    --heading-color: #1d4ed8;
+    --muted-color: #64748b;
+    --white-color: #ffffff;
+
+    /* สีเส้นขอบ */
+    --border-color: #dbeafe;
+
+    /* เงา */
+    --box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
+
+    /* มุมโค้ง */
+    --border-radius: 24px;
+
+    /* ฟอนต์ */
+    --font-base: 'Kanit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: var(--font-base);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-base);
+    color: var(--text-color);
+
+    background: linear-gradient(
+        135deg,
+        #f0f9ff 0%,
+        #e0f2fe 50%,
+        #f8fbff 100%
+    );
+
+    min-height: 100vh;
+    line-height: 1.7;
+}
+
+/* ==============================
+   2. ส่วนหัวเว็บไซต์ (Header)
+============================== */
+
+header {
+    text-align: center;
+    padding: 25px 20px 18px;
+
+    background: linear-gradient(
+        135deg,
+        #60a5fa,
+        #38bdf8,
+        #7dd3fc
+    );
+
+    color: #ffffff;
+    border-bottom: 4px solid #bae6fd;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.15);
+}
+
+header h1 {
+    margin: 0 0 5px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 3px 8px rgba(30, 64, 175, 0.2);
+}
+
+header p {
+    margin: 0;
+    font-size: 1rem;
+    color: #eff6ff;
+}
+
+/* ==============================
+   3. เมนูนำทาง (Navigation)
+============================== */
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    list-style: none;
+    margin: 5px 0 0;
+    padding: 0;
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 5px 24px;
+
+    background: rgba(255, 255, 255, 0.95);
+    color: #2563eb;
+
+    text-decoration: none;
+    font-weight: 500;
+
+    border: 2px solid #dbeafe;
+    border-radius: 50px;
+
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-3px);
+}
+
+/* ==============================
+   4. เนื้อหาหลัก
+============================== */
+
+main {
+    width: 100%;
+    max-width: 1000px;
+    margin: 45px auto;
+    padding: 0 24px;
+}
+
+/* ==============================
+   5. หัวข้อสมาชิก
+============================== */
+
+.team-section {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.team-section > h2 {
+    color: #1d4ed8;
+    font-size: 1.7rem;
+    margin: 0 0 30px;
+    font-weight: 600;
+}
+
+.team-section > h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin: 12px auto 0;
+
+    background: linear-gradient(
+        90deg,
+        #38bdf8,
+        #2563eb
+    );
+
+    border-radius: 10px;
+}
+
+/* ==============================
+   6. จัดเรียงการ์ดสมาชิก
+============================== */
+
+.member-grid,
+.portfolio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* ==============================
+   7. การ์ดสมาชิก
+============================== */
+
+.card {
+    width: 280px;
+    padding: 28px 22px;
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    border: 2px solid #dbeafe;
+    border-radius: 24px;
+
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #60a5fa;
+    box-shadow: 0 18px 35px rgba(37, 99, 235, 0.16);
+}
+
+/* รูปสมาชิก */
+
+.card img {
+    width: 150px;
+    height: 150px;
+    max-width: 100%;
+
+    border-radius: 50%;
+    border: 5px solid #dbeafe;
+
+    object-fit: cover;
+    margin-bottom: 12px;
+
+    background: #eff6ff;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.12);
+}
+
+/* ชื่อสมาชิก */
+
+.card h2 {
+    margin: 8px 0 12px;
+    color: #1d4ed8;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* ข้อมูลสมาชิก */
+
+.card p {
+    margin: 7px 0;
+    color: #64748b;
+    font-size: 1rem;
+}
+
+/* ลิงก์ในชื่อสมาชิก */
+
+.card h2 a {
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+.card h2 a:hover {
+    color: #0284c7;
+}
+
+/* ==============================
+   8. ปุ่มดูโปรไฟล์
+============================== */
+
+.profile-btn {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 24px;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        135deg,
+        #3b82f6,
+        #0ea5e9
+    );
+
+    text-decoration: none;
+    font-weight: 500;
+
+    border: none;
+    border-radius: 50px;
+
+    box-shadow: 0 5px 12px rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.profile-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #0284c7
+    );
+
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
+    transform: translateY(-3px);
+}
+
+/* ==============================
+   9. กล่องข้อมูลกลุ่ม
+============================== */
+
+.info-box {
+    width: 100%;
+    padding: 28px;
+    margin: 35px 0;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    border: 2px solid #bfdbfe;
+    border-left: 6px solid #3b82f6;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 22px rgba(37, 99, 235, 0.07);
+}
+
+.info-box h2 {
+    margin-top: 0;
+    color: #1d4ed8;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.info-box p {
+    margin-bottom: 0;
+    color: #475569;
+}
+
+/* รายการในกล่องข้อมูล */
+
+.info-box ul {
+    padding-left: 25px;
+    line-height: 2;
+}
+
+.info-box li::marker {
+    color: #3b82f6;
+}
+
+/* ==============================
+   10. รูปภาพโรงเรียน
+============================== */
+
+.school-img {
+    max-width: 100%;
+    height: auto;
+
+    border: 3px solid #bfdbfe;
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.school-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.18);
+}
+
+/* ==============================
+   11. ปุ่มหน้าแรกซ้ายล่าง
+============================== */
+
+.home-btn {
+    position: fixed;
+    left: 22px;
+    bottom: 22px;
+    z-index: 1000;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 22px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #0ea5e9
+    );
+
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #0284c7
+    );
+
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.35);
+}
+
+/* ==============================
+   12. ส่วนท้ายเว็บไซต์
+============================== */
+
+footer {
+    text-align: center;
+    padding: 28px 20px;
+    margin-top: 70px;
+
+    background: #dbeafe;
+    border-top: 4px solid #93c5fd;
+
+    color: #1e40af;
+    font-weight: 500;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #0284c7;
+    text-decoration: underline;
+}
+
+/* ==============================
+   13. รองรับโทรศัพท์และแท็บเล็ต
+============================== */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 40px 18px 30px;
+    }
+
+    header h1 {
+        font-size: 1.7rem;
+    }
+
+    main {
+        margin: 30px auto;
+        padding: 0 16px;
+    }
+
+    .member-grid,
+    .portfolio-container {
+        gap: 22px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .info-box {
+        padding: 22px;
+    }
+
+    .team-section > h2 {
+        font-size: 1.5rem;
+    }
+
+    footer {
+        margin-top: 50px;
+        padding-bottom: 75px;
+    }
+
+    .home-btn {
+        left: 15px;
+        bottom: 15px;
+        padding: 11px 18px;
+    }
+}
+
+/* ==============================
+   14. ลดเอฟเฟกต์สำหรับผู้ใช้ที่ต้องการ
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==============================
+   15. กล่องข้อมูลสมาชิก
+============================== */
+
+.info-box {
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 30px;
+
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #edf7ff
+    );
+
+    border: 1px solid #cce7ff;
+    border-radius: 24px;
+
+    box-shadow: 0 12px 30px rgba(40, 120, 200, 0.13);
+
+    overflow: hidden;
+}
+
+/* ==============================
+   16. รูปโปรไฟล์
+============================== */
+
+.profile-image {
+    width: 170px;
+    height: 170px;
+    margin: 0 auto 18px;
+    padding: 5px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #48baff,
+        #1769d2
+    );
+
+    box-shadow: 0 8px 22px rgba(23, 105, 210, 0.25);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: 4px solid white;
+    border-radius: 50%;
+
+    box-sizing: border-box;
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 28px rgba(23, 105, 210, 0.35);
+}
+
+/* ==============================
+   17. ชื่อโปรไฟล์
+============================== */
+
+.profile-name {
+    text-align: center;
+    color: #1769aa;
+    margin: 10px 0 5px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.profile-subtitle {
+    text-align: center;
+    color: #6a9bc5;
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* ==============================
+   18. เส้นคั่น
+============================== */
+
+.profile-divider {
+    width: 70px;
+    height: 4px;
+    margin: 0 auto 25px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        90deg,
+        #55c4ff,
+        #2878e5
+    );
+}
+
+/* ==============================
+   19. หัวข้อข้อมูล
+============================== */
+
+.info-box h3 {
+    color: #1769aa;
+    margin-top: 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #d8edff;
+    font-weight: 600;
+}
+
+/* ==============================
+   20. รายการข้อมูล
+============================== */
+
+.info-box ul {
+    padding-left: 22px;
+    line-height: 2;
+}
+
+.info-box li {
+    padding: 5px 0;
+    color: #34536d;
+}
+
+.info-box li strong {
+    color: #1769aa;
+    font-weight: 600;
+}
+
+/* ==============================
+   21. รูปโรงเรียนในหน้าโปรไฟล์
+============================== */
+
+.school-img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: 220px;
+
+    object-fit: fill;
+    object-position: center;
+
+    margin: 15px auto;
+
+    border: 4px solid white;
+    border-radius: 18px;
+
+    box-shadow: 0 6px 18px rgba(30, 100, 160, 0.18);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.school-img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(30, 100, 160, 0.25);
+}
+
+/* ==============================
+   22. แสดงผลบนมือถือ
+============================== */
+
+@media (max-width: 600px) {
+
+    .info-box {
+        margin: 20px 12px;
+        padding: 22px;
+    }
+
+    .profile-image {
+        width: 145px;
+        height: 145px;
+    }
+
+    .profile-name {
+        font-size: 23px;
+    }
+
+    .school-img {
+        height: 180px;
+    }
+}
+
+/* Google Maps Section */
+.map-section {
+    text-align: center;
+    padding: 40px 20px;
+    margin: 30px auto;
+    max-width: 1000px;
+}
+
+.map-section h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.map-section p {
+    margin-bottom: 20px;
+}
+
+.map-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 3px solid #1769aa;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.map-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #0284c7
+    );
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.map-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #0284c7
+    );
+    transform: translateY(-3px);
+}
+.school-map-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.school-map-image img {
+    display: block;
+    max-width: 100%;
+    width: 500px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: contain;
+}
