@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ | The CharlieKirk file ของเรา</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <header>
+        <h1>เข้าสู่ระบบ</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="member1.html">สมาชิกคนที่ 1</a></li>
+                <li><a href="member2.html">สมาชิกคนที่ 2</a></li>
+                <li><a href="login.html" class="active" aria-current="page">เข้าสู่ระบบ</a></li>
+                <li><a href="register.html">สมัครสมาชิก</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-card">
+            <div class="auth-icon">🔐</div>
+            <h2>ยินดีต้อนรับกลับมา</h2>
+            <p class="auth-subtitle">กรุณาเข้าสู่ระบบเพื่อดำเนินการต่อ</p>
+
+            <form id="loginForm" action="#" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrap">
+                        <span class="icon">👤</span>
+                        <input type="text" id="username" name="username"
+                               placeholder="กรอก Username" required autocomplete="username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrap has-toggle">
+                        <span class="icon">🔒</span>
+                        <input type="password" id="password" name="password"
+                               placeholder="กรอก Password" required autocomplete="current-password">
+                        <button type="button" class="toggle-pass" data-target="password"
+                                aria-label="แสดง/ซ่อนรหัสผ่าน">👁️</button>
+                    </div>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-confirm">ยืนยัน</button>
+                    <button type="button" class="btn btn-cancel"
+                            onclick="window.location.href='index.html'">ยกเลิก</button>
+                </div>
+            </form>
+
+            <p class="auth-link">ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a></p>
+        </div>
+    </main>
+
+    <a href="index.html" class="home-btn">⌂ หน้าแรก</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+    // แสดง/ซ่อนรหัสผ่าน
+    document.querySelectorAll('.toggle-pass').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var input = document.getElementById(btn.dataset.target);
+            var show = input.type === 'password';
+            input.type = show ? 'text' : 'password';
+            btn.textContent = show ? '🙈' : '👁️';
+        });
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('.btn-confirm');
+        submitBtn.disabled = true;
+
+        try {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // ถ้าไม่ใช่ email ให้แปลง username เป็น email ก่อน
+            let email = username;
+            if (!username.includes('@')) {
+                const { data, error } = await sb.rpc('get_email_by_username', { p_username: username });
+                if (error || !data) throw new Error('Username หรือ Password ไม่ถูกต้อง');
+                email = data;
+            }
+
+            const { error } = await sb.auth.signInWithPassword({ email, password });
+            if (error) {
+                if (/not confirmed/i.test(error.message))
+                    throw new Error('กรุณายืนยันอีเมลก่อนเข้าสู่ระบบ');
+                throw new Error('Username หรือ Password ไม่ถูกต้อง');
+            }
+
+            window.location.href = 'index.html';
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>

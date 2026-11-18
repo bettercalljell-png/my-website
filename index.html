@@ -15,9 +15,11 @@
         <p>🍗เว็บไซต์แนะนำสมาชิกและผลงานของกลุ่ม🥷🏿 </p>
         <nav class="navbar">
         <ul>
-            <li><a href="index.html" class="active">หน้าแรก</a></li>
+            <li><a href="index.html" class="active" aria-current="page">หน้าแรก</a></li>
             <li><a href="member1.html">สมาชิกคนที่ 1</a></li>
             <li><a href="member2.html">สมาชิกคนที่ 2</a></li>
+            <li><a href="login.html">เข้าสู่ระบบ</a></li>
+            <li><a href="register.html">สมัครสมาชิก</a></li>
         </ul>
     </nav>
     </header>
@@ -44,7 +46,7 @@
 
                 <!-- สมาชิกคนที่ 2 -->
                 <div class="card">
-                    <img src="M1.jpg"
+                    <img src="m1.jpg"
                          alt="รูปสมาชิกคนที่ 2"
                          width="150"
                          height="150">
@@ -87,4 +89,30 @@
   <a href="index.html" class="home-btn">⌂ หน้าแรก</a>
 
 </body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+    (async function () {
+        const { data: { session } } = await sb.auth.getSession();
+        if (!session) return;
+
+        const { data: profile } = await sb.from('profiles')
+            .select('fullname').eq('id', session.user.id).single();
+
+        const loginLink = document.querySelector('nav a[href="login.html"]');
+        const regLink   = document.querySelector('nav a[href="register.html"]');
+
+        loginLink.textContent = '👤 ' + (profile ? profile.fullname : session.user.email);
+        loginLink.removeAttribute('href');
+
+        regLink.textContent = 'ออกจากระบบ';
+        regLink.href = '#';
+        regLink.addEventListener('click', async function (e) {
+            e.preventDefault();
+            await sb.auth.signOut();
+            window.location.reload();
+        });
+    })();
+</script>
+
 </html>
